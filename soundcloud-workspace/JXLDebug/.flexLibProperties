@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="false" version="3">
+  <includeClasses>
+    <classEntry path="Debug"/>
+    <classEntry path="DebugMax"/>
+    <classEntry path="DebugWindow"/>
+    <classEntry path="com.jxl.debug.Colors"/>
+    <classEntry path="com.jxl.debug.DebugMaxItemRenderer"/>
+    <classEntry path="com.jxl.debug.Message"/>
+    <classEntry path="com.jxl.debug.MessageType"/>
+    <classEntry path="com.jxl.debug.debug_mizznax"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>

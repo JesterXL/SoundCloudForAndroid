@@ -1,0 +1,49 @@
+package com.jxl.soundcloud.rl.commands
+{
+	import com.jxl.soundcloud.events.AuthorizeEvent;
+	import com.jxl.soundcloud.events.SearchEvent;
+	import com.jxl.soundcloud.events.SearchServiceEvent;
+	import com.jxl.soundcloud.services.SearchService;
+
+	public class SearchCommand extends AsyncCommand
+	{
+		
+		[Inject]
+		public var searchService:SearchService;
+		
+		[Inject]
+		public var searchEvent:SearchEvent;
+		
+		public function SearchCommand()
+		{
+			super();
+		}
+		
+		[PostConstruct]
+		public function init():void
+		{
+			eventMap.mapListener(searchService, SearchServiceEvent.SEARCH_SUCCESS, onSearchSuccess, SearchServiceEvent);
+			eventMap.mapListener(searchService, SearchServiceEvent.SEARCH_ERROR, onSearchError, SearchServiceEvent);
+			eventMap.mapListener(searchService, AuthorizeEvent.UNAUTHORIZED, onUnauthorized, AuthorizeEvent);
+		}
+		
+		public function execute():void
+		{
+			searchService.search(searchEvent.searchString);
+		}
+		
+		private function onSearchSuccess(event:SearchServiceEvent):void
+		{
+		}
+		
+		private function onSearchError(event:SearchServiceEvent):void
+		{
+			
+		}
+		
+		private function onUnauthorized(event:AuthorizeEvent):void
+		{
+			
+		}
+	}
+}

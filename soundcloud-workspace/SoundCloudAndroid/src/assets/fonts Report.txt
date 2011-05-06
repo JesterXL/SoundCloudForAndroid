@@ -1,0 +1,30 @@
+fonts.swf Movie Report
+-----------------------
+
+Metadata
+--------
+Bytes    Value
+-----    -----
+ 1290    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"> <rdf:Description rdf:about="" xmlns:xmp="http://ns.adobe.com/xap/1.0/"> <xmp:CreatorTool>Adobe Flash CS4 Professional</xmp:CreatorTool> <xmp:CreateDate>2010-04-11T17:07:36-04:00</xmp:CreateDate> <xmp:MetadataDate>2010-04-11T18:46:57-04:00</xmp:MetadataDate> <xmp:ModifyDate>2010-04-11T18:46:57-04:00</xmp:ModifyDate> </rdf:Description> <rdf:Description rdf:about="" xmlns:dc="http://purl.org/dc/elements/1.1/"> <dc:format>application/x-shockwave-flash</dc:format> </rdf:Description> <rdf:Description rdf:about="" xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/" xmlns:stRef="http://ns.adobe.com/xap/1.0/sType/ResourceRef#"> <xmpMM:DerivedFrom rdf:parseType="Resource"> <stRef:instanceID>xmp.iid:F77F117407206811AA5DCCCB0C554EF9</stRef:instanceID> <stRef:documentID>xmp.did:F77F117407206811AA5DCCCB0C554EF9</stRef:documentID> <stRef:originalDocumentID>xmp.did:F77F117407206811AA5DCCCB0C554EF9</stRef:originalDocumentID> </xmpMM:DerivedFrom> <xmpMM:DocumentID>xmp.did:7512CA0514206811AA5DCCCB0C554EF9</xmpMM:DocumentID> <xmpMM:InstanceID>xmp.iid:7512CA0514206811AA5DCCCB0C554EF9</xmpMM:InstanceID> <xmpMM:OriginalDocumentID>xmp.did:F77F117407206811AA5DCCCB0C554EF9</xmpMM:OriginalDocumentID> </rdf:Description> </rdf:RDF> 
+
+Frame #    Frame Bytes    Total Bytes    Scene
+-------    -----------    -----------    ----------------
+      1          36063          36063    Scene 1 (AS 3.0 Classes Export Frame)
+
+Scene                        Shape Bytes    Text Bytes    ActionScript Bytes
+-------------------------    -----------    ----------    ------------------
+Scene 1                                0           546                  1536
+
+Font Name                 Bytes        Characters    
+----------------------    ---------    --------------
+_sans                            38    
+HelveticaNeue-Bold Bold       16067     !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~ˆ˜–—‘’‚“”„†‡•…‰‹›€™
+HelveticaNeue                 16442     !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~ˆ˜–—‘’‚“”„†‡•…‰‹›€™
+
+ActionScript Bytes    Location
+------------------    --------
+              1536    Scene 1:Frame 1
+
+
+
+

@@ -1,0 +1,9 @@
+package com.jxl.soundcloud
+{
+	public class SoundCloudConstants
+	{
+		public function SoundCloudConstants()
+		{
+		}
+	}
+}

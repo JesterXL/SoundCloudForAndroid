@@ -1,0 +1,280 @@
+package com.jxl.soundcloud.views.mainviews
+{
+    import assets.Styles;
+    import assets.flash.LoaderAnimation;
+    
+    import com.bit101.components.Component;
+    import com.bit101.components.Label;
+    import com.jxl.soundcloud.Constants;
+    import com.jxl.soundcloud.components.InputText;
+    import com.jxl.soundcloud.components.MenuInputText;
+    import com.jxl.soundcloud.components.PushButton;
+    import com.jxl.soundcloud.events.AuthorizeViewEvent;
+    
+    import flash.desktop.NativeApplication;
+    import flash.display.DisplayObjectContainer;
+    import flash.display.Graphics;
+    import flash.display.StageOrientation;
+    import flash.events.ErrorEvent;
+    import flash.events.Event;
+    import flash.events.KeyboardEvent;
+    import flash.events.LocationChangeEvent;
+    import flash.events.MouseEvent;
+    import flash.events.StageOrientationEvent;
+    import flash.geom.Rectangle;
+    import flash.globalization.NationalDigitsType;
+    import flash.media.StageWebView;
+    import flash.ui.Keyboard;
+
+    [Event(name="codeSubmit", type="com.jxl.soundcloud.events.AuthorizeViewEvent")]
+	[Event(name="abortAuthorization", type="com.jxl.soundcloud.events.AuthorizeViewEvent")]
+	[Event(name="reloadAuthorize", type="com.jxl.soundcloud.events.AuthorizeViewEvent")]
+	public class AuthorizeView extends Component
+	{
+
+		public static const STATE_MAIN:String = "mainState";
+		public static const STATE_LOADING:String = "loadingState";
+		
+        public function get webView():StageWebView { return web; }
+		
+		private var codeInputText:MenuInputText;
+		private var submitButton:PushButton;
+        private var web:StageWebView;
+		private var loaderAnimation:LoaderAnimation;
+		
+		public function AuthorizeView(parent:DisplayObjectContainer=null, xpos:Number=0, ypos:Number=0)
+		{
+			super(parent, xpos, ypos);
+
+			
+		}
+		
+		protected override function init():void
+		{
+			super.init();
+			
+			currentState = STATE_MAIN;
+			setSize(Constants.WIDTH, Constants.HEIGHT);
+			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+			this.addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
+			
+			NativeApplication.nativeApplication.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+		}
+		
+		private function onKeyDown(event:KeyboardEvent):void
+		{
+			// don't handle unless you're actually showing
+			if(stage == null) return;
+			
+			switch(event.keyCode)
+			{
+				case Keyboard.BACK:
+					switch(currentState)
+					{
+						case STATE_LOADING:
+							event.preventDefault();
+							dispatchEvent(new AuthorizeViewEvent(AuthorizeViewEvent.ABORT_AUTHORIZE));
+							break;
+						
+						case STATE_MAIN:
+						default:
+							// zee goggles, zey do nuffing!
+							break;
+					}
+					break;
+			}
+		}
+
+        private function onAddedToStage(event:Event):void
+        {
+            web.stage = stage;
+        }
+
+        private function onRemovedFromStage(event:Event):void
+        {
+            web.stage = null;
+        }
+
+        public function loadURL(url:String):void
+        {
+            web.loadURL(url);
+        }
+		
+		public function refresh():void
+		{
+			if(web)
+				web.reload();
+		}
+		
+		public function hide():void
+		{
+			visible = false;
+			web.stage = null;
+		}
+		
+		public function show():void
+		{
+			visible = true;
+			if(stage)
+				web.stage = stage;
+		}
+
+        public function destroy():void
+        {
+			NativeApplication.nativeApplication.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+			
+            this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+            this.removeEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
+
+            web.removeEventListener(Event.COMPLETE, onURLComplete);
+            web.removeEventListener(ErrorEvent.ERROR, onURLError);
+            web.stop();
+            web.dispose();
+            web = null;
+
+            if(contains(submitButton)) removeChild(submitButton);
+            if(contains(codeInputText)) removeChild(codeInputText);
+			
+            submitButton = null;
+            codeInputText = null;
+			
+			if(loaderAnimation && contains(loaderAnimation))
+			{
+				removeChild(loaderAnimation);
+				loaderAnimation = null;
+			}
+        }
+
+		protected override function addChildren():void
+		{
+			super.addChildren();
+			
+			codeInputText = new MenuInputText();
+			addChild(codeInputText);
+            codeInputText.width = 200;
+			codeInputText.prompt = "<access code goes here>";
+			
+			submitButton = new PushButton();
+			addChild(submitButton);
+			submitButton.addEventListener(MouseEvent.CLICK, onClick);
+            submitButton.label = "Submit";
+            submitButton.setSize(200, 44);
+
+            web = new StageWebView();
+            web.addEventListener(Event.COMPLETE, onLocationChange);
+            web.addEventListener(ErrorEvent.ERROR, onURLError);
+			web.addEventListener(LocationChangeEvent.LOCATION_CHANGE, onLocationChange);
+		}
+		
+		private function onLocationChange(event:LocationChangeEvent):void
+		{
+			var location:String;
+			
+			if(event is LocationChangeEvent)
+			{
+				location = LocationChangeEvent(event).location;
+			}
+			else
+			{
+				location = _stageWebView.location;
+			}
+			
+			
+			var search:String 		= "oauth_verifier=";
+			var ver:String 			= location;
+			var startIndex:int 		= ver.lastIndexOf(search);
+			if(startIndex != -1)
+			{
+				ver = ver.substr(startIndex + search.length, location.length);
+				submitCodeSignal.dispatch(ver);
+			}
+		}
+
+        private function onURLError(event:ErrorEvent):void
+        {
+            Debug.log("AuthorizeView::onURLError: " + event);
+        }
+		
+		public override function draw():void
+		{
+			super.draw();
+
+            if(codeInputText == null) return;
+
+			var g:Graphics;
+			var targetY:Number;
+			
+			submitButton.setSize(130, 60);
+			submitButton.move(width - (submitButton.width + 4), 7);
+			
+			codeInputText.move(4, 0);
+			codeInputText.setSize(width - (width - submitButton.x) - codeInputText.x - 4, 66);
+			
+			targetY = submitButton.y + submitButton.height + 4;
+			const MARGIN:Number = 2;
+			web.viewPort = new Rectangle(MARGIN, targetY, width - MARGIN, height - (targetY + 22) - MARGIN);
+			
+			g = graphics;
+			g.clear();
+			g.beginFill(0xFFFFFF);
+			g.drawRect(0, 0, width, height);
+			
+			g.lineStyle(6, 0x666666);
+			g.drawRect(web.viewPort.x,  web.viewPort.y,  web.viewPort.width, web.viewPort.height);
+			
+			
+			g.endFill();
+		}
+		
+		protected override function onEnterState(state:String):void
+		{
+			switch(state)
+			{
+				case STATE_MAIN:
+					if(contains(codeInputText) == false)
+						addChild(codeInputText);
+					
+					if(contains(submitButton) == false)
+						addChild(submitButton);
+						
+					break;
+				
+				case STATE_LOADING:
+					if(loaderAnimation == null)
+					{
+						loaderAnimation = new LoaderAnimation();
+						addChild(loaderAnimation);
+						loaderAnimation.x = (width / 2) - (loaderAnimation.width / 2);
+						loaderAnimation.y = 4;
+					}
+					break;
+			}
+		}
+		
+		protected override function onExitState(oldState:String):void
+		{
+			switch(oldState)
+			{
+				case STATE_MAIN:
+					if(contains(codeInputText))
+						removeChild(codeInputText);
+					
+					if(contains(submitButton))
+						removeChild(submitButton);
+					
+				case STATE_LOADING:
+					if(loaderAnimation && contains(loaderAnimation))
+						removeChild(loaderAnimation);
+				break;
+			}
+		}
+		
+		private function onClick(event:MouseEvent):void
+		{
+			var evt:AuthorizeViewEvent 	= new AuthorizeViewEvent(AuthorizeViewEvent.CODE_SUBMITTED);
+			// [jwarden 11.19.2010] HACK: I think Change event isn't firing fast enough inside InputText
+			evt.code					= codeInputText.textField.text;
+			dispatchEvent(evt);
+		}
+	}
+}

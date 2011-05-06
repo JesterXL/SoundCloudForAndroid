@@ -1,0 +1,9 @@
+package com.jxl.soundcloud.rl.commands
+{
+	public class AsynchronousCommand
+	{
+		public function AsynchronousCommand()
+		{
+		}
+	}
+}

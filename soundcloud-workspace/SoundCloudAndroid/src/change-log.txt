@@ -1,0 +1,36 @@
+Version 1.3.1
+
+- Fixed duplicate change log
+
+Version 1.3.0
+
+- added native Android menu support for quitting the application, and disconnecting from SoundCloud.com.  This removes the big buttons at the top.
+
+- added the ability to refresh your current results for favorites & search (in case your wireless is flaky, or you just want the latest results)
+
+- added a built-in change log
+
+Version 1.2.1
+
+A lot of important changes in this version 1.2.1 compared to 1.0.7.
+
+- Replaced the old pageable list with a draggable list.  You can now touch, drag, and throw it for both Favorites and Search results.
+
+- Music files now try to cache your phone’s SD Card instead of the phone itself.
+
+- Made input text fields for both the authorization code and search easier to touch and larger fonts.
+
+- You can now press the back key on the Search to abort a search if it’s load, and on your Search Results to search again.  This removes the back button, and gives 
+you more visual room.
+
+- You can now press the back button on the authorization code submission form if you made a mistake, or your phone’s currently not connected to the internet.
+
+- Removed the landscape GUI.
+
+- The GUI should now size to different phone sizes.
+
+- Various bug fixes.
+
+Version 1.0.7
+
+Fix for the playback issue.

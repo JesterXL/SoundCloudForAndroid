@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:components="com.jxl.soundcloud.components.*"
+			   creationComplete="init()">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import assets.Styles;
+			import assets.fonts.Fonts;
+			
+			import com.jxl.soundcloud.components.ButtonBar;
+			import com.jxl.soundcloud.components.PageableList;
+			import com.jxl.soundcloud.components.SongItemRenderer;
+			
+			import mx.core.UIComponent;
+			
+			private var fonts:Fonts;
+			private var styles:Styles;
+			
+			private function init():void
+			{
+				var debug:Debug = new Debug();
+				var list:Array = [];
+				var len:int = 100;
+				for(var index:uint = 0; index < len; index++)
+				{
+					list[index] = index;
+				}
+				
+				var ui:UIComponent = new UIComponent();
+				addElement(ui);
+				ui.addChild(debug);
+				debug.y = 300;
+				/*
+				var buttonBar:ButtonBar = new ButtonBar();
+				buttonBar.dataProvider = list;
+				buttonBar.itemsPerPage = 4;
+				
+				ui.addChild(buttonBar);
+				*/
+				
+				var pageableList:PageableList 	= new PageableList();
+				pageableList.items 				= list;
+				pageableList.itemRenderer		= SongItemRenderer;
+				ui.addChild(pageableList);
+				
+			}
+		]]>
+	</fx:Script>
+	
+</s:Application>
