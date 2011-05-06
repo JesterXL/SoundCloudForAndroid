@@ -6,7 +6,7 @@
 <stringAttribute key="com.adobe.flexbuilder.debug.ATTR_APPLICATION" value="src/SoundCloudAndroid.as"/>
 <booleanAttribute key="com.adobe.flexbuilder.debug.ATTR_CLEAR_APP_DATA" value="false"/>
 <stringAttribute key="com.adobe.flexbuilder.debug.ATTR_MOBILE_DEVICE_NAME" value="Motorola Droid 2"/>
-<stringAttribute key="com.adobe.flexbuilder.debug.ATTR_MOBILE_LAUNCH_HANDLER" value="com.adobe.flexide.multiplatform.android.launching.AndroidOnDeviceLaunchHandler"/>
+<stringAttribute key="com.adobe.flexbuilder.debug.ATTR_MOBILE_LAUNCH_HANDLER" value="com.adobe.flexide.launching.multiplatform.launchhandlers.MultiPlatformADLLaunchHandler"/>
 <stringAttribute key="com.adobe.flexbuilder.debug.ATTR_MOBILE_PLATFORM" value="com.adobe.flexide.multiplatform.android.platform"/>
 <stringAttribute key="com.adobe.flexbuilder.debug.ATTR_PROJECT" value="SoundCloudAndroid"/>
 <stringAttribute key="com.adobe.flexbuilder.debug.ATTR_RUN_URL" value="file:/Users/jesterxl/Documents/_Projects/SoundCloud-Android/soundcloud-workspace/SoundCloudAndroid/bin-debug/SoundCloudAndroid-app.xml"/>
