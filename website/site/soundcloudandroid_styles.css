@@ -1,0 +1,125 @@
+body
+{
+	background-color: #FFFFFF;
+	background-image:url(images/background.png);
+	background-repeat:repeat-x;
+	margin: 0px;
+	
+}
+
+.headerImageLeft
+{
+	background-image:url(images/header-left.png);
+	background-repeat:repeat-x;
+	width: 67px;
+}
+
+.headerImage
+{
+	background-image: url(images/header.png);
+	background-repeat:no-repeat;
+	width: 441px;
+	height: 26px;
+}
+
+.navigationBar
+{
+	float:left;
+	padding-left: 14px;
+	padding-top:4px;
+	color: #FFFFFF;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+}
+
+a
+{
+	cursor: pointer;
+}
+
+.noLink
+{
+	color: #FFFFFF;
+}
+
+a.navigationBarLink
+{
+	color: #FFFFFF;
+}
+
+a.navigationBarLink:link
+{
+	color: #FFFFFF;	
+}
+
+a.navigationBarLink:visited
+{
+	color: #CCCCCC;	
+}
+
+a.navigationBarLink:hover
+{
+	color: #EEEEEE;
+}
+
+.soundCloudAndroidLogoBig
+{
+	padding-left: 10px;
+	padding-top: 10px;	
+}
+
+.titleText
+{
+	color: #06C;
+	font-size: 25px;
+	font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
+}
+
+.forAndroid
+{
+	color: #06C;
+	font-size: 12px;
+	font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
+}
+
+.headlineText
+{
+	color: #333333;
+	font-size: 15px;
+	font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
+}
+
+.installButton
+{
+	padding-left: 10px;
+	clear: left;
+	padding-top: 40px;
+	cursor: pointer;
+}
+
+a.footerLink
+{
+	color: #666666;
+	font-size: 11px;
+	font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
+}
+
+a.footerLink:link
+{
+	color: #666666;
+}
+
+a.footerLink:visited
+{
+	color: #333333;
+}
+
+a.footerLink:hover
+{
+	color: #99999;
+}
+
+.footer
+{
+	padding-top: 100px;
+}
